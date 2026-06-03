@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TP IA - Agriculture au Burundi
 
 Ce projet repond au TP de prediction des bonnes et mauvaises recoltes au Burundi a partir du fichier `agriculture_burundi.csv`.
@@ -64,3 +65,7 @@ Les colonnes `rendement_t_ha` et `production_totale_t` sont exclues des variable
 Les lignes sans `bonne_recolte` sont supprimees pour l'entrainement. Les autres valeurs manquantes sont traitees dans les pipelines par imputation : mediane pour les variables numeriques continues et valeur la plus frequente pour les variables binaires/categorielles. Les variables categorielles sont encodees par One-Hot Encoding avec `drop='first'`.
 
 La division train/test utilise `stratify=y` et `random_state=42` pour conserver la distribution des classes et rendre les resultats reproductibles.
+=======
+# AIProject
+projet de prediction des revenus des recoltes de l'agriculture au burundi
+>>>>>>> 1bc643a0bcda25fe382d9265a87f41094b52fb35
