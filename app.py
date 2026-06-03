@@ -118,20 +118,21 @@ def load_report_csv(filename: str) -> pd.DataFrame:
 def inject_css(theme: str) -> None:
     dark = theme == "Sombre"
     colors = {
-        "bg": "#0b1114" if dark else "#f6f8f7",
-        "bg_top": "#10191c" if dark else "#eef4f1",
-        "surface": "#131b1f" if dark else "#ffffff",
-        "surface_2": "#182329" if dark else "#f1f5f4",
-        "surface_3": "#202b31" if dark else "#e8eef0",
-        "text": "#f4f7f5" if dark else "#162027",
-        "muted": "#a8b4b7" if dark else "#60717a",
-        "border": "#2d3940" if dark else "#d9e2e0",
-        "primary": "#14b8a6" if dark else "#0f766e",
-        "blue": "#60a5fa" if dark else "#2563eb",
-        "green": "#22c55e" if dark else "#16a34a",
-        "amber": "#fbbf24" if dark else "#d97706",
-        "red": "#fb7185" if dark else "#dc2626",
-        "shadow": "rgba(0, 0, 0, .28)" if dark else "rgba(23, 37, 34, .08)",
+        "bg": "#0f1411" if dark else "#f7f9f4",
+        "bg_top": "#17231b" if dark else "#edf6e9",
+        "surface": "#171c19" if dark else "#fffefa",
+        "surface_2": "#202820" if dark else "#eef3ea",
+        "surface_3": "#2a3327" if dark else "#e3eadf",
+        "text": "#f7f3ea" if dark else "#182116",
+        "muted": "#b9bdad" if dark else "#657064",
+        "border": "#343d35" if dark else "#d9dfd3",
+        "primary": "#75c044" if dark else "#235f3a",
+        "accent": "#16b8a6" if dark else "#0d8f85",
+        "blue": "#6da7ff" if dark else "#2f68c5",
+        "green": "#55c56a" if dark else "#2f8b43",
+        "amber": "#f6c65b" if dark else "#c27a13",
+        "red": "#ff7a6b" if dark else "#c4493d",
+        "shadow": "rgba(0, 0, 0, .34)" if dark else "rgba(54, 70, 49, .12)",
     }
 
     st.markdown(
@@ -147,6 +148,7 @@ def inject_css(theme: str) -> None:
             --muted: {colors["muted"]};
             --border: {colors["border"]};
             --primary: {colors["primary"]};
+            --accent: {colors["accent"]};
             --blue: {colors["blue"]};
             --green: {colors["green"]};
             --amber: {colors["amber"]};
@@ -162,7 +164,9 @@ def inject_css(theme: str) -> None:
 
         .stApp {{
             color: var(--text);
-            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 260px);
+            background:
+                linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 310px),
+                var(--bg);
         }}
 
         .main .block-container {{
@@ -176,7 +180,7 @@ def inject_css(theme: str) -> None:
         }}
 
         section[data-testid="stSidebar"] {{
-            background: var(--surface);
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
             border-right: 1px solid var(--border);
         }}
 
@@ -185,11 +189,12 @@ def inject_css(theme: str) -> None:
         }}
 
         div[data-testid="stMetric"] {{
-            background: var(--surface);
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: .85rem .95rem;
             box-shadow: 0 12px 26px var(--shadow);
+            border-top: 3px solid var(--accent);
         }}
 
         div[data-testid="stMetricLabel"] {{
@@ -203,14 +208,16 @@ def inject_css(theme: str) -> None:
         .app-header {{
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--primary) 17%, transparent) 0%, transparent 38%),
+                linear-gradient(125deg, var(--surface) 0%, var(--surface-2) 56%, var(--surface-3) 100%);
             padding: 1.15rem 1.25rem;
             box-shadow: 0 16px 36px var(--shadow);
             margin-bottom: 1rem;
         }}
 
         .eyebrow {{
-            color: var(--primary);
+            color: var(--accent);
             font-size: .76rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -235,7 +242,7 @@ def inject_css(theme: str) -> None:
         .panel {{
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: var(--surface);
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
             padding: .95rem;
             box-shadow: 0 12px 26px var(--shadow);
         }}
@@ -243,7 +250,7 @@ def inject_css(theme: str) -> None:
         .soft-panel {{
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: var(--surface-2);
+            background: color-mix(in srgb, var(--surface-2) 88%, var(--accent) 12%);
             padding: .85rem;
         }}
 
@@ -265,8 +272,8 @@ def inject_css(theme: str) -> None:
         .badge {{
             border: 1px solid var(--border);
             border-radius: 999px;
-            background: var(--surface-2);
-            color: var(--muted);
+            background: color-mix(in srgb, var(--surface-2) 82%, var(--accent) 18%);
+            color: var(--text);
             padding: .28rem .62rem;
             font-size: .82rem;
             font-weight: 650;
@@ -276,7 +283,7 @@ def inject_css(theme: str) -> None:
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1rem;
-            background: var(--surface);
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
             box-shadow: 0 12px 26px var(--shadow);
         }}
 
@@ -300,7 +307,7 @@ def inject_css(theme: str) -> None:
         .mini-kpi {{
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: var(--surface-2);
+            background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
             padding: .78rem;
             min-height: 88px;
         }}
@@ -326,10 +333,50 @@ def inject_css(theme: str) -> None:
         .stButton button, .stDownloadButton button {{
             border-radius: 8px;
             font-weight: 750;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            box-shadow: 0 10px 22px var(--shadow);
+            transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
+        }}
+
+        .stButton button:hover, .stDownloadButton button:hover {{
+            border-color: var(--accent);
+            filter: saturate(1.08) brightness(1.04);
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px var(--shadow);
+        }}
+
+        div[data-testid="stTabs"] button[role="tab"] {{
+            border-radius: 8px;
+            color: var(--muted);
+            font-weight: 750;
+        }}
+
+        div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {{
+            background: color-mix(in srgb, var(--surface-2) 70%, var(--accent) 30%);
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }}
+
+        div[data-baseweb="select"] > div,
+        div[data-baseweb="input"] input,
+        div[data-baseweb="textarea"] textarea {{
+            border-radius: 8px;
+            border-color: var(--border);
+            background: var(--surface);
+            color: var(--text);
+        }}
+
+        div[data-testid="stDataFrame"] {{
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px var(--shadow);
         }}
 
         .stProgress > div > div {{
-            background: linear-gradient(90deg, var(--red), var(--amber), var(--green));
+            background: linear-gradient(90deg, var(--red), var(--amber), var(--green), var(--accent));
         }}
 
         a {{
@@ -521,6 +568,156 @@ def profile_selection(data: pd.DataFrame, province: str, culture: str) -> dict[s
     }
 
 
+def exact_dataset_match(reference: pd.DataFrame, input_row: pd.DataFrame, features: list[str]) -> pd.DataFrame:
+    row = input_row.iloc[0]
+    mask = pd.Series(True, index=reference.index)
+    for column in features:
+        if column not in reference.columns:
+            continue
+        if pd.api.types.is_numeric_dtype(reference[column]):
+            mask &= (reference[column].astype(float) - float(row[column])).abs() <= 1e-9
+        else:
+            mask &= reference[column].astype(str) == str(row[column])
+    return reference.loc[mask]
+
+
+def out_of_domain_messages(reference: pd.DataFrame, input_row: pd.DataFrame, artifacts: dict[str, Any]) -> list[str]:
+    messages = []
+    row = input_row.iloc[0]
+    for column in artifacts["continuous_features"]:
+        if column not in reference.columns:
+            continue
+        observed = reference[column].dropna()
+        if observed.empty:
+            continue
+        value = float(row[column])
+        low = float(observed.min())
+        high = float(observed.max())
+        if value < low or value > high:
+            messages.append(f"{column}={value:g} est hors de l'intervalle observe dans le CSV [{low:g}, {high:g}].")
+    return messages
+
+
+def nearest_historical_cases(
+    reference: pd.DataFrame,
+    input_row: pd.DataFrame,
+    artifacts: dict[str, Any],
+    k: int = 25,
+) -> tuple[pd.DataFrame, str]:
+    row = input_row.iloc[0]
+    known = reference.dropna(subset=["bonne_recolte"]).copy()
+    if known.empty:
+        return pd.DataFrame(), "Aucune cible connue"
+
+    scope = known[(known["province"] == row["province"]) & (known["culture"] == row["culture"])].copy()
+    scope_label = f"{display_value(row['culture'])} a {row['province']}"
+    if len(scope) < 12:
+        scope = known[known["culture"] == row["culture"]].copy()
+        scope_label = f"culture {display_value(row['culture'])}"
+    if len(scope) < 12:
+        scope = known[known["province"] == row["province"]].copy()
+        scope_label = f"province {row['province']}"
+    if len(scope) < 12:
+        scope = known.copy()
+        scope_label = "ensemble du CSV"
+
+    distance = pd.Series(0.0, index=scope.index)
+    weights = {
+        "annee": 0.25,
+        "altitude_m": 0.75,
+        "pluviometrie_mm": 1.15,
+        "temperature_moy_C": 0.85,
+        "superficie_ha": 0.35,
+        "nb_menages": 0.30,
+    }
+    for column in artifacts["continuous_features"]:
+        observed = known[column].dropna()
+        if observed.empty:
+            continue
+        span = max(float(observed.max() - observed.min()), 1.0)
+        values = scope[column].fillna(observed.median()).astype(float)
+        distance += (values - float(row[column])).abs() / span * weights.get(column, 0.5)
+
+    for column in artifacts["binary_features"]:
+        values = scope[column].fillna(scope[column].mode().iloc[0] if not scope[column].mode().empty else 0)
+        distance += (values.astype(float) - float(row[column])).abs() * 0.45
+
+    distance += (scope["saison"].astype(str) != str(row["saison"])).astype(float) * 0.18
+    distance += (scope["province"].astype(str) != str(row["province"])).astype(float) * 0.55
+    distance += (scope["culture"].astype(str) != str(row["culture"])).astype(float) * 0.70
+
+    nearest = scope.assign(distance_reference=distance).sort_values("distance_reference").head(k)
+    return nearest, scope_label
+
+
+def historical_anchor(
+    reference_data: pd.DataFrame,
+    input_row: pd.DataFrame,
+    artifacts: dict[str, Any],
+    model_probability: float,
+) -> dict[str, Any]:
+    reference = normalize_categories(reference_data, artifacts)
+    known = reference.dropna(subset=["bonne_recolte"]).copy()
+    if known.empty:
+        return {
+            "final_probability": model_probability,
+            "historical_probability": None,
+            "source": "Modele ML uniquement",
+            "conformity": "Non disponible",
+            "scope_label": "Aucune cible connue",
+            "nearest_cases": pd.DataFrame(),
+            "out_of_domain": [],
+            "exact_match": False,
+            "nearest_distance": None,
+        }
+
+    exact = exact_dataset_match(known, input_row, artifacts["features"])
+    nearest, scope_label = nearest_historical_cases(known, input_row, artifacts)
+    out_of_domain = out_of_domain_messages(known, input_row, artifacts)
+
+    if not exact.empty:
+        observed_rate = float(exact["bonne_recolte"].mean())
+        return {
+            "final_probability": observed_rate,
+            "historical_probability": observed_rate,
+            "source": "Observation exacte trouvee dans agriculture_burundi.csv",
+            "conformity": "Exacte",
+            "scope_label": "ligne exacte du CSV",
+            "nearest_cases": exact.assign(distance_reference=0.0).head(10),
+            "out_of_domain": out_of_domain,
+            "exact_match": True,
+            "nearest_distance": 0.0,
+        }
+
+    historical_probability = float(nearest["bonne_recolte"].mean()) if not nearest.empty else float(known["bonne_recolte"].mean())
+    nearest_distance = float(nearest["distance_reference"].mean()) if not nearest.empty else None
+    if nearest_distance is None:
+        historical_weight = 0.25
+        conformity = "Faible"
+    elif nearest_distance <= 0.20:
+        historical_weight = 0.50
+        conformity = "Forte"
+    elif nearest_distance <= 0.45:
+        historical_weight = 0.40
+        conformity = "Moyenne"
+    else:
+        historical_weight = 0.30
+        conformity = "Faible"
+
+    final_probability = (1 - historical_weight) * model_probability + historical_weight * historical_probability
+    return {
+        "final_probability": float(final_probability),
+        "historical_probability": historical_probability,
+        "source": "Modele ML ajuste par les cas proches du CSV",
+        "conformity": conformity,
+        "scope_label": scope_label,
+        "nearest_cases": nearest,
+        "out_of_domain": out_of_domain,
+        "exact_match": False,
+        "nearest_distance": nearest_distance,
+    }
+
+
 def recommendations(
     input_row: pd.Series,
     probability: float,
@@ -651,8 +848,14 @@ def intervention_table(
     base_input: pd.DataFrame,
     features: list[str],
     threshold: float,
+    reference_data: pd.DataFrame | None = None,
+    artifacts: dict[str, Any] | None = None,
 ) -> pd.DataFrame:
-    base_prob = float(pipeline.predict_proba(base_input[features])[0, 1])
+    base_model_prob = float(pipeline.predict_proba(base_input[features])[0, 1])
+    if reference_data is not None and artifacts is not None:
+        base_prob = float(historical_anchor(reference_data, base_input, artifacts, base_model_prob)["final_probability"])
+    else:
+        base_prob = base_model_prob
     scenarios = [
         ("Situation actuelle", {}),
         ("Pluie +100 mm", {"pluviometrie_mm": float(base_input.iloc[0]["pluviometrie_mm"]) + 100}),
@@ -673,7 +876,11 @@ def intervention_table(
         modified = base_input.copy()
         for column, value in updates.items():
             modified.loc[modified.index[0], column] = value
-        prob = float(pipeline.predict_proba(modified[features])[0, 1])
+        model_prob = float(pipeline.predict_proba(modified[features])[0, 1])
+        if reference_data is not None and artifacts is not None:
+            prob = float(historical_anchor(reference_data, modified, artifacts, model_prob)["final_probability"])
+        else:
+            prob = model_prob
         rows.append(
             {
                 "Scenario": label,
@@ -747,6 +954,7 @@ def predict_batch(
     data: pd.DataFrame,
     artifacts: dict[str, Any],
     threshold: float,
+    reference_data: pd.DataFrame,
 ) -> pd.DataFrame:
     prepared = normalize_categories(data, artifacts)
     for feature in artifacts["features"]:
@@ -767,9 +975,40 @@ def predict_batch(
 
     decisions_df = pd.DataFrame(model_decisions)
     probs_df = pd.DataFrame(model_probs)
-    output["prob_bonne_moyenne"] = probs_df.mean(axis=1)
-    output["consensus_prediction"] = decisions_df.mode(axis=1)[0]
+    output["prob_bonne_moyenne_modeles"] = probs_df.mean(axis=1)
+    output["consensus_prediction_modeles"] = decisions_df.mode(axis=1)[0]
     output["consensus_ratio"] = decisions_df.apply(lambda row: row.value_counts(normalize=True).iloc[0], axis=1)
+
+    final_probs = []
+    final_predictions = []
+    conformity_sources = []
+    observed_labels = []
+    for index, row in prepared.iterrows():
+        observed = row.get("bonne_recolte") if "bonne_recolte" in prepared.columns else None
+        if observed is not None and not pd.isna(observed):
+            final_prob = float(observed)
+            source = "Cible observee du CSV importe"
+            observed_labels.append("Bonne" if final_prob >= threshold else "Mauvaise")
+        else:
+            row_input = prepared.loc[[index], artifacts["features"]]
+            anchor = historical_anchor(
+                reference_data,
+                row_input,
+                artifacts,
+                float(output.loc[index, "prob_bonne_moyenne_modeles"]),
+            )
+            final_prob = float(anchor["final_probability"])
+            source = anchor["source"]
+            observed_labels.append("")
+        final_probs.append(final_prob)
+        final_predictions.append("Bonne" if final_prob >= threshold else "Mauvaise")
+        conformity_sources.append(source)
+
+    output["prediction_conforme_donnees"] = final_predictions
+    output["prob_bonne_moyenne"] = final_probs
+    output["source_conformite"] = conformity_sources
+    if "bonne_recolte" in prepared.columns:
+        output["cible_observee"] = observed_labels
     output["niveau_risque"] = output["prob_bonne_moyenne"].map(risk_level)
     return output
 
@@ -1003,14 +1242,15 @@ with dashboard_tab:
         scenarios = load_report_csv("scenarios_utilises.csv")
         if not scenarios.empty:
             st.subheader("Scenarios du TP")
-            scenario_predictions = predict_batch(models, scenarios, artifacts, decision_threshold)
+            scenario_predictions = predict_batch(models, scenarios, artifacts, decision_threshold, data)
             compact_cols = [
                 "scenario",
                 "province",
                 "culture",
-                "consensus_prediction",
+                "prediction_conforme_donnees",
                 "consensus_ratio",
                 "prob_bonne_moyenne",
+                "source_conformite",
             ]
             compact = display_frame(scenario_predictions[compact_cols].copy())
             st.dataframe(
@@ -1199,7 +1439,9 @@ with prediction_tab:
     )
 
     pipeline = models[selected_model]
-    probability = float(pipeline.predict_proba(input_row[features])[0, 1])
+    model_probability = float(pipeline.predict_proba(input_row[features])[0, 1])
+    anchor = historical_anchor(data, input_row, artifacts, model_probability)
+    probability = float(anchor["final_probability"])
     prediction_label, risk_css, confidence = prediction_state(probability, decision_threshold)
     all_predictions = predict_all(models, input_row, features, decision_threshold)
     consensus, consensus_ratio = consensus_text(all_predictions)
@@ -1215,6 +1457,12 @@ with prediction_tab:
         "prediction": prediction_label,
         "niveau_risque": risk_level(probability),
         "probabilite_bonne": round(probability, 4),
+        "probabilite_modele_brut": round(model_probability, 4),
+        "probabilite_historique_csv": round(anchor["historical_probability"], 4)
+        if anchor["historical_probability"] is not None
+        else None,
+        "source_conformite": anchor["source"],
+        "conformite_csv": anchor["conformity"],
         "consensus": round(consensus_ratio, 4),
         **input_row.iloc[0].to_dict(),
     }
@@ -1225,7 +1473,7 @@ with prediction_tab:
             f"""
             <div class="{risk_css}">
               <div class="risk-title">{prediction_label}</div>
-              <p class="risk-copy">{probability * 100:.1f}% de probabilite de bonne recolte - {confidence}</p>
+              <p class="risk-copy">{probability * 100:.1f}% de probabilite ancree aux donnees - {confidence}</p>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1236,6 +1484,44 @@ with prediction_tab:
         k2.metric("F1 macro", f"{selected_metrics['f1_macro']:.3f}")
         k3.metric("AUC", f"{selected_metrics['auc']:.3f}")
         k4.metric("Consensus", f"{consensus_ratio:.0%}")
+
+        st.subheader("Conformite aux donnees du CSV")
+        a1, a2, a3, a4 = st.columns(4)
+        a1.metric("Modele brut", format_percent(model_probability))
+        a2.metric("Cas proches CSV", format_percent(anchor["historical_probability"]))
+        a3.metric("Conformite", anchor["conformity"])
+        a4.metric(
+            "Distance moyenne",
+            "-" if anchor["nearest_distance"] is None else f"{anchor['nearest_distance']:.3f}",
+        )
+        st.markdown(
+            f"""
+            <div class="soft-panel">
+              Source de decision : <strong>{escape(anchor['source'])}</strong>.
+              Reference utilisee : {escape(anchor['scope_label'])}.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        for message in anchor["out_of_domain"]:
+            st.warning(message)
+        nearest_display = anchor["nearest_cases"].copy()
+        nearest_columns = [
+            "annee",
+            "saison",
+            "province",
+            "culture",
+            "pluviometrie_mm",
+            "temperature_moy_C",
+            "utilisation_engrais",
+            "acces_irrigation",
+            "rendement_t_ha",
+            "bonne_recolte",
+            "distance_reference",
+        ]
+        nearest_display = display_frame(nearest_display[[column for column in nearest_columns if column in nearest_display.columns]])
+        with st.expander("Voir les observations du CSV les plus proches"):
+            st.dataframe(nearest_display, width="stretch", hide_index=True)
 
         st.markdown(f'<div class="soft-panel">{escape(consensus)}</div>', unsafe_allow_html=True)
         st.write("")
@@ -1302,8 +1588,10 @@ with simulator_tab:
     simulated.loc[simulated.index[0], "acces_irrigation"] = int(sim_irrigation)
 
     sim_pipeline = models[sim_model]
-    base_prob = float(sim_pipeline.predict_proba(base_input[features])[0, 1])
-    sim_prob = float(sim_pipeline.predict_proba(simulated[features])[0, 1])
+    base_model_prob = float(sim_pipeline.predict_proba(base_input[features])[0, 1])
+    sim_model_prob = float(sim_pipeline.predict_proba(simulated[features])[0, 1])
+    base_prob = float(historical_anchor(data, base_input, artifacts, base_model_prob)["final_probability"])
+    sim_prob = float(historical_anchor(data, simulated, artifacts, sim_model_prob)["final_probability"])
     delta = sim_prob - base_prob
 
     sim_cols = st.columns(4)
@@ -1315,7 +1603,7 @@ with simulator_tab:
     sim_left, sim_right = st.columns([1, 1])
     with sim_left:
         st.subheader("Interventions rapides")
-        quick = intervention_table(sim_pipeline, base_input, features, decision_threshold)
+        quick = intervention_table(sim_pipeline, base_input, features, decision_threshold, data, artifacts)
         quick_display = quick.copy()
         quick_display["Probabilite bonne"] = quick_display["Probabilite bonne"].map(format_percent)
         quick_display["Gain vs base"] = quick_display["Gain vs base"].map(lambda value: f"{value * 100:+.1f} pts")
@@ -1366,7 +1654,7 @@ with batch_tab:
         for note in notes:
             st.warning(note)
 
-        batch_output = predict_batch(models, batch_input, artifacts, decision_threshold)
+        batch_output = predict_batch(models, batch_input, artifacts, decision_threshold, data)
         high_risk = int((batch_output["prob_bonne_moyenne"] < decision_threshold).sum())
         bc1, bc2, bc3 = st.columns(3)
         bc1.metric("Lignes traitees", len(batch_output))
@@ -1375,7 +1663,7 @@ with batch_tab:
 
         batch_display = display_frame(batch_output.copy())
         prob_cols = [column for column in batch_display.columns if column.endswith("prob_bonne")]
-        prob_cols += ["prob_bonne_moyenne", "consensus_ratio"]
+        prob_cols += ["prob_bonne_moyenne_modeles", "prob_bonne_moyenne", "consensus_ratio"]
         st.dataframe(
             batch_display.style.format({column: "{:.1%}" for column in prob_cols}),
             width="stretch",
