@@ -1,0 +1,91 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "964802de-0cac-4e80-8325-3b381fb25d54",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import random\n",
+    "from sklearn.feature_extraction.text import TfidfVectorizer\n",
+    "from sklearn.linear_model import LogisticRegression\n",
+    "\n",
+    "# Données d'entraînement (questions + intentions)\n",
+    "questions = [\n",
+    "    \"bonjour\", \"salut\", \"hello\",\n",
+    "    \"comment ça va\", \"tu vas bien\",\n",
+    "    \"au revoir\", \"bye\",\n",
+    "    \"quel est ton nom\", \"qui es tu\",\n",
+    "    \"merci beaucoup\", \"merci\"\n",
+    "]\n",
+    "\n",
+    "intents = [\n",
+    "    \"salutation\", \"salutation\", \"salutation\",\n",
+    "    \"etat\", \"etat\",\n",
+    "    \"au_revoir\", \"au_revoir\",\n",
+    "    \"identite\", \"identite\",\n",
+    "    \"remerciement\", \"remerciement\"\n",
+    "]\n",
+    "\n",
+    "# Réponses possibles\n",
+    "responses = {\n",
+    "    \"salutation\": [\"Bonjour \", \"Salut !\", \"Hello !\"],\n",
+    "    \"etat\": [\"Je vais bien merci !\", \"Toujours opérationnel \"],\n",
+    "    \"au_revoir\": [\"Au revoir \", \"À bientôt !\"],\n",
+    "    \"identite\": [\"Je suis un chatbot intelligent créé avec Python \"],\n",
+    "    \"remerciement\": [\"Avec plaisir !\", \"Je t’en prie \"]\n",
+    "}\n",
+    "\n",
+    "# Vectorisation du texte\n",
+    "vectorizer = TfidfVectorizer()\n",
+    "X = vectorizer.fit_transform(questions)\n",
+    "\n",
+    "# Modèle IA\n",
+    "model = LogisticRegression()\n",
+    "model.fit(X, intents)\n",
+    "\n",
+    "# Boucle de discussion\n",
+    "print(\"Chatbot IA (tape 'quit' pour quitter)\\n\")\n",
+    "\n",
+    "while True:\n",
+    "    user_input = input(\"Toi: \")\n",
+    "\n",
+    "    if user_input.lower() == \"quit\":\n",
+    "        print(\"Chatbot: Au revoir \")\n",
+    "        break\n",
+    "\n",
+    "    # Transformation du texte\n",
+    "    X_test = vectorizer.transform([user_input])\n",
+    "\n",
+    "    # Prédiction\n",
+    "    intent = model.predict(X_test)[0]\n",
+    "\n",
+    "    # Réponse\n",
+    "    response = random.choice(responses[intent])\n",
+    "    print(\"Chatbot:\", response)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

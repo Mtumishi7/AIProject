@@ -1,0 +1,5 @@
+scenario,province,culture,decision_tree_prediction,decision_tree_prob_bonne,random_forest_prediction,random_forest_prob_bonne,logistic_regression_prediction,logistic_regression_prob_bonne
+Kayanza - Mais,Kayanza,Maïs,Bonne,1.0,Bonne,1.0,Bonne,0.9998
+Bubanza - Manioc,Bubanza,Manioc,Bonne,1.0,Bonne,0.9,Bonne,0.9428
+Gitega - Haricot,Gitega,Haricot,Bonne,0.9792,Bonne,0.81,Bonne,0.9112
+Cibitoke - Patate douce,Cibitoke,Patate douce,Bonne,1.0,Bonne,0.98,Bonne,0.9996

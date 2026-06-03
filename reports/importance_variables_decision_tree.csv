@@ -1,0 +1,21 @@
+feature,importance
+continuous__altitude_m,0.2684407575113712
+binary__acces_irrigation,0.23442820592534638
+binary__utilisation_engrais,0.22021305406119135
+continuous__pluviometrie_mm,0.16649623000323865
+continuous__superficie_ha,0.08063415013656268
+continuous__nb_menages,0.016086448562596868
+continuous__annee,0.013701153799692748
+continuous__temperature_moy_C,0.0
+categorical__saison_B,0.0
+categorical__province_Bujumbura Rural,0.0
+categorical__province_Bururi,0.0
+categorical__province_Cankuzo,0.0
+categorical__province_Cibitoke,0.0
+categorical__province_Gitega,0.0
+categorical__province_Kayanza,0.0
+categorical__province_Kirundo,0.0
+categorical__province_Makamba,0.0
+categorical__province_Muramvya,0.0
+categorical__province_Muyinga,0.0
+categorical__province_Mwaro,0.0

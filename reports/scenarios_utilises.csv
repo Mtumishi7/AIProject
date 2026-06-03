@@ -1,0 +1,5 @@
+scenario,province,culture,altitude_m,pluviometrie_mm,temperature_moy_C,utilisation_engrais,acces_irrigation,annee,saison,superficie_ha,nb_menages
+Kayanza - Mais,Kayanza,Maïs,1980,920,17.8,1,0,2023,A,2.37,76
+Bubanza - Manioc,Bubanza,Manioc,790,550,25.4,0,1,2023,A,2.37,97
+Gitega - Haricot,Gitega,Haricot,1720,430,18.2,0,0,2023,A,2.3449999999999998,107
+Cibitoke - Patate douce,Cibitoke,Patate douce,810,810,24.1,1,1,2023,A,2.22,106
